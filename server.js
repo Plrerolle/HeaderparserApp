@@ -4,6 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
+var ip = require('ip');
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -23,6 +24,15 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+
+app.get("/api/whoami", function(req, res) {
+  console.log(req.headers["accept-language"] );
+  res.json({"ipaddress": ip.address(), 
+            "language": req.headers["accept-language"], 
+            "software": req.headers["user-agent"]})
+});
+
+
 
 
 
